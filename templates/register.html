@@ -1,0 +1,59 @@
+{% extends "layouts/loginLayout.html" %} {% block body %} 
+<div class="bodyContactC">
+    <div class="row col-lg-5 col-sm-7 col-md-7  ">
+        <div class="card regist  flex-row-revers text-center" >
+            <p class="card-header my-3 header cardParagraph" >Sign Up and Start Applying
+                For
+                Jobs</p>
+                {% if validationError %}
+                <div class="alert alert-danger p-0 bg-transparent border-0">
+                    {{ validationError }}
+    
+                    </div
+            {% endif %}
+            <div class="card-body">  
+                <form class="row g-3 needs-validation" action="/register" method="POST" novalidate>    {% csrf_token %}
+                   
+                    <div class="col-md-6 col-lg-6">
+                        <label for="validationCustom01" class="form-label d-flex flex-row">First
+                            name</label>
+                        <input type="text" class="form-control" id="validationCustom01"
+                            placeholder="first name" name="first_name" required />
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <label for="validationCustom02" class="form-label d-flex flex-row">Last name</label>
+                        <input type="text" class="form-control" id="validationCustom02"
+                            placeholder="last name" required name="last_name" >
+                    </div>
+                    <div class="col-md-12 col-lg-12">
+                        <label for="validationCustom03" class="form-label d-flex flex-row">Email</label>
+                        <input type="text" class="form-control" id="validationCustom03" name="email"
+                            placeholder="email" required />
+                    </div>
+                    <div class="col-md-12 col-lg-12 ">
+                        <label for="validationCustom04" class="form-label d-flex flex-row">Password</label>
+                        <input type="password" class="form-control" id="validationCustom04" name="password"
+                            placeholder="password" required>
+                    </div>
+                    <div class="col-md-12 col-lg-12">
+                        <button class="btn btn-primary col-lg-12" type="submit" onclick="RegiterDone(event)">Sign Up</button>
+                    </div>
+                    <hr>
+                    <div class="col-md-12 col-lg-12">
+                        <p>Already on WUZZUF?
+                            <a href="/" class="anchorsOfForms">Sign
+                                in</a>
+                        </p>
+                    </div>
+                    <div class="col-md-12 col-lg-12">
+                        <span style="font-size: 13px;">Looking to post jobs?</span>
+                            <a  href="company-signUp/companySignUp" style="text-decoration: none ;font-size:12px; margin-left: 2px;">
+                                Create an Employer Account.</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
