@@ -16,9 +16,12 @@ class UserManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError('Users require an email field')
+        if User.objects.filter(email=email).exists():
+            raise ValueError('This email address is already in use.')
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
+        
         user.save(using=self._db)
         return user
 
@@ -49,13 +52,13 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(_('email address'), unique=True)
+    is_company = models.BooleanField(default=False)
+    email = models.EmailField(unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = UserManager()
     def __str__(self):
-        return f"{self.username}"
-
+        return f"{self.email}"
 
 
 class Job(models.Model):
